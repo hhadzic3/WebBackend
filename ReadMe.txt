@@ -1,4 +1,4 @@
-Kreirati bazu sa nazivom DBINSPRECTION u phpMyAdmin-u baza MySQL
+Kreirati bazu sa nazivom DBINSPECTION u phpMyAdmin-u baza MySQL
 
 username i password na bazu su u ovom primjeru root,root, mozete ih promijeniti u db.js
 
