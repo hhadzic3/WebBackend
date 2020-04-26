@@ -11,26 +11,26 @@ app.get('/', function (req, res) {
 });
 
 // ************************************ GET:
-app.get('/dijelovi', (req, res) => db.dijelovi.findAll().then(dijelovi => res.json(dijelovi)));
-app.get('/korisnici', (req, res) => db.korisnici.findAll().then(korisnici => res.json(korisnici)));
-app.get('/vozila', (req, res) => db.vozila.findAll().then(vozila => res.json(vozila)));
-app.get('/tehnicki_pregledi', (req, res) => db.tehnicki_pregledi.findAll().then(tehnicki_pregledi => res.json(tehnicki_pregledi)));
-app.get('/kvarovi', (req, res) => db.kvarovi.findAll().then(kvarovi => res.json(kvarovi)));
-app.get('/tehnicki_pregledi/:id' , (req, res) =>  db.tehnicki_pregledi.finfOne({
+app.get('/parts', (req, res) => db.dijelovi.findAll().then(dijelovi => res.json(parts)));
+app.get('/users', (req, res) => db.korisnici.findAll().then(korisnici => res.json(users)));
+app.get('/vehicles', (req, res) => db.vozila.findAll().then(vozila => res.json(vehicles)));
+app.get('/technical_reviews', (req, res) => db.tehnicki_pregledi.findAll().then(technical_reviews => res.json(technical_reviews)));
+app.get('/failures', (req, res) => db.failures.findAll().then(failures => res.json(failures)));
+app.get('/technical_reviews/:id' , (req, res) =>  db.tehnicki_pregledi.finfOne({
     where: {   id: req.params.id }})   
 );
-app.get('/korisnici/:id' , (req, res) =>  db.korisnici.finfOne({
+app.get('/users/:id' , (req, res) =>  db.users.finfOne({
     where: {   id: req.params.id }})   
 );
 
 //  ****************************************** DELETE:
-app.delete('/deleteDijelovi/:id' , (req, res) => db.dijelovi.destroy({
+app.delete('/deleteParts/:id' , (req, res) => db.parts.destroy({
     where: {   id: req.params.id     }
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){ console.log('Deleted successfully'); }}).then( () => { res.json({ status : 'Deleted!'}) })  
 );
 
-app.delete('/deleteKorisnici/:id' , (req, res) =>  db.korisnici.destroy({
+app.delete('/deleteUsers/:id' , (req, res) =>  db.users.destroy({
     where: {   id: req.params.id    }
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){
@@ -38,7 +38,7 @@ app.delete('/deleteKorisnici/:id' , (req, res) =>  db.korisnici.destroy({
     }}, function(err){ console.log(err); }).then( () => { res.json({ status : 'Deleted!'}) })  
 );
 
-app.delete('/deleteKvarovi/:id' , (req, res) =>  db.kvarovi.destroy({
+app.delete('/deleteFailures/:id' , (req, res) =>  db.failures.destroy({
     where: {   id: req.params.id }
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){
@@ -46,14 +46,14 @@ app.delete('/deleteKvarovi/:id' , (req, res) =>  db.kvarovi.destroy({
     }}, function(err){console.log(err); }).then( () => { res.json({ status : 'Deleted!'}) })
 );
 
-app.delete('/deleteTehnicki_pregledi/:id' , (req, res) =>  db.tehnicki_pregledi.destroy({
+app.delete('/deleteTechnical_reviews/:id' , (req, res) =>  db.technical_reviews.destroy({
     where: {   id: req.params.id }
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){
       console.log('Deleted successfully');
     }}, function(err){console.log(err);  })  .then( () => { res.json({ status : 'Deleted!'}) }) 
 );
-app.delete('/deleteVozila/:id' , (req, res) =>  db.vozila.destroy({
+app.delete('/deleteVehicles/:id' , (req, res) =>  db.vehicles.destroy({
     where: {   id: req.params.id}
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){console.log('Deleted successfully');}}, function(err){console.log(err); 
@@ -61,64 +61,64 @@ app.delete('/deleteVozila/:id' , (req, res) =>  db.vozila.destroy({
 );
 
 // ****************************************** POST:
-app.post('/addKorisnici' , function(req, res)  {
+app.post('/addUsers' , function(req, res)  {
     if ( !req.body.naziv )
         res.json({ error: 'Bad Data' })
     
-    db.korisnici.create(req.body).then( data => { res.send(data) });
+    db.users.create(req.body).then( data => { res.send(data) });
 });
-app.post('/addPregledi' , function(req, res)  {
+app.post('/addReviews' , function(req, res)  {
     if ( !req.body.stanje )
         res.json({ error: 'Bad Data' })
     
-    db.tehnicki_pregledi.create(req.body).then( data => { res.send(data) });
+    db.technical_reviews.create(req.body).then( data => { res.send(data) });
 });
-app.post('/addDijelovi' , function(req, res)  {
+app.post('/addParts' , function(req, res)  {
     if ( !req.body.naziv )
         res.json({ error: 'Bad Data'})
     
-    db.dijelovi.create(req.body).then( data => { res.send(data) });
+    db.parts.create(req.body).then( data => { res.send(data) });
 });
-app.post('/addVozila' , function(req, res)  {
+app.post('/addVehicles' , function(req, res)  {
     if ( !req.body.naziv_vlasnika )
         res.json({ error: 'Bad Data' })
     
-    db.vozila.create(req.body).then( data => { res.send(data) });
+    db.vehicles.create(req.body).then( data => { res.send(data) });
 });
-app.post('/addKvarovi' , function(req, res)  {
+app.post('/addFailures' , function(req, res)  {
     if ( !req.body )
         res.json({ error:'Bad Data' })
     
-    db.kvarovi.create(req.body).then( data => { res.send(data) });
+    db.failures.create(req.body).then( data => { res.send(data) });
 });
 
 // ********************************************** PUT:
-app.put('/editVozila/:id' , function(req, res)  {
-    if ( !req.body.marka )
+app.put('/editVehicles/:id' , function(req, res)  {
+    if ( !req.body.brand )
         res.json({ error: 'Bad Data' })
         
     var v = req.body;
-    db.vozila.update( {
-        naziv_vlasnika: v.naziv_vlasnika,
-        marka: v.marka,
-        tip: v.tip,
-        serijski_broj: v.serijski_broj,
-        godina_proizvodnje: v.godina_proizvodnje,
-        datum_upotrebe: v.datum_upotrebe,
-        prethodna_inspekcija: v.prethodna_inspekcija
+    db.vehicles.update( {
+        owner_name: v.owner_name,
+        brand: v.brand,
+        type: v.type,
+        serial_number: v.serial_number,
+        production_year: v.production_year,
+        date_of_use: v.date_of_use,
+        previous_inspection: v.previous_inspection
     }, { where: { id: req.params.id } }
     ).then( () => { res.json({ status : 'Updated!'}) });
 });
 
-app.put('/editPregleda/:id' , function(req, res)  {
-    if ( !req.body.stanje )
+app.put('/editReview/:id' , function(req, res)  {
+    if ( !req.body.state )
         res.json({ error: 'Bad Data' })
     
     var v = req.body;
-    db.tehnicki_pregledi.update({
-        stanje: v.stanje, vrsta: v.vrsta ,
-        odgovorna_osoba:v.odgovorna_osoba,
-        vozilo:v.vozilo
+    db.technical_reviews.update({
+        state: v.state, kind: v.kind ,
+        responsible_person:v.responsible_person,
+        vehicle:v.vehicle
     }, { where: { id: req.params.id } }
     ).then( () => { res.json({ status : 'Updated!'}) });
 });
