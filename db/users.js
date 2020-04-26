@@ -22,12 +22,14 @@ module.exports = function (sequelize, DataTypes) {
         zip_code: DataTypes.STRING,
         mail: DataTypes.STRING,
         phone_number: DataTypes.STRING,
-        user_name: DataTypes.STRING,
-        password: DataTypes.STRING,
+        user_name:Sequelize.STRING, // todo: dodati validaciju za UNIQUE
+        password: Sequelize.STRING,
+           
     }, {
         sequelize,
         tableName: 'users',
         timestamps: false,
         underscored: true
-    });
+    }
+    );
 };

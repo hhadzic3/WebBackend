@@ -62,7 +62,7 @@ app.delete('/api/deleteVehicles/:id' , (req, res) =>  db.vehicles.destroy({
 
 // ****************************************** POST:
 app.post('/api/addUsers' , function(req, res)  {
-    if ( !req.body.name )
+    if ( !req.body.first_name )
         res.json({ error: 'Bad Data' })
     
     db.users.create(req.body).then( data => { res.send(data) });
@@ -125,5 +125,5 @@ app.put('/api/editReview/:id' , function(req, res)  {
 
 
 module.exports = app.listen(8080, () => {
-    console.log('Server correct...');
+    console.log('Server is working...');
 });
