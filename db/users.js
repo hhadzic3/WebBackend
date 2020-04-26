@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('korisnici', {
+    return sequelize.define('users', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -9,8 +9,8 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true
         },
-        firs name: DataTypes.STRING,
-        last name: DataTypes.STRING,
+        first_name: DataTypes.STRING,
+        last_name: DataTypes.STRING,
         position: {
             type: Sequelize.STRING,
             validate:{ isIn: [["radnik","menadzer","administrator"]] }
@@ -26,7 +26,7 @@ module.exports = function (sequelize, DataTypes) {
         password: DataTypes.STRING,
     }, {
         sequelize,
-        tableName: 'korisnici',
+        tableName: 'users',
         timestamps: false,
         underscored: true
     });

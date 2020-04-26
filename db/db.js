@@ -17,7 +17,7 @@ db.vehicles = sequelize.import(__dirname + '/vehicles.js');
 
 // Korisnik <--> Pregled
 db.users.hasOne(db.technical_reviews, {foreignKey: {name: 'responsible_person'}});
-db.technical_reviews.belongsTo(db.users, {as: 'zaduzenaOsobaa', foreignKey: {name: 'responsible_person'}});
+db.technical_reviews.belongsTo(db.users, {as: 'responsiblePerson', foreignKey: {name: 'responsible_person'}});
 // Vozilo <--> Pregledi
 db.vehicles.hasMany(db.technical_reviews, {foreignKey: {name: 'vehicle'}});
 db.technical_reviews.belongsTo(db.vehicles, {as: 'zaduzenoVozilo', foreignKey: {name: 'vehicle'}});

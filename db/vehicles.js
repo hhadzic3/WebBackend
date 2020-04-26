@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('vozila', {
+    return sequelize.define('vehicles', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -23,7 +23,7 @@ module.exports = function (sequelize, DataTypes) {
         previous_inspection: DataTypes.DATE
     }, {
         sequelize,
-        tableName: 'vozila',
+        tableName: 'vehicles',
         underscored: true,
         timestamps: false
     });
