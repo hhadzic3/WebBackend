@@ -20,9 +20,9 @@ db.users.hasOne(db.technical_reviews, {foreignKey: {name: 'responsible_person'}}
 db.technical_reviews.belongsTo(db.users, {as: 'responsiblePerson', foreignKey: {name: 'responsible_person'}});
 // Vozilo <--> Pregledi
 db.vehicles.hasMany(db.technical_reviews, {foreignKey: {name: 'vehicle'}});
-db.technical_reviews.belongsTo(db.vehicles, {as: 'zaduzenoVozilo', foreignKey: {name: 'vehicle'}});
+db.technical_reviews.belongsTo(db.vehicles, {as: 'vehicleInUse', foreignKey: {name: 'vehicle'}});
 // Vozilo <--> Kvarovi
 db.vehicles.hasMany(db.kvarovi, {foreignKey: {name: 'vehicle'}});
-db.failures.belongsTo(db.vozila, {as: 'kvaroviVozila', foreignKey: {name: 'vehicle'}});
+db.failures.belongsTo(db.vozila, {as: 'vehicleFailures', foreignKey: {name: 'vehicle'}});
 
 module.exports = db;
