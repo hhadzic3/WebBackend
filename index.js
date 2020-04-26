@@ -7,16 +7,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/pocetna.html');
+    res.sendFile(__dirname + '/home.html');
 });
 
 // ************************************ GET:
-app.get('/parts', (req, res) => db.dijelovi.findAll().then(dijelovi => res.json(parts)));
-app.get('/users', (req, res) => db.korisnici.findAll().then(korisnici => res.json(users)));
-app.get('/vehicles', (req, res) => db.vozila.findAll().then(vozila => res.json(vehicles)));
-app.get('/technical_reviews', (req, res) => db.tehnicki_pregledi.findAll().then(technical_reviews => res.json(technical_reviews)));
+app.get('/parts', (req, res) => db.parts.findAll().then(parts => res.json(parts)));
+app.get('/users', (req, res) => db.users.findAll().then(users => res.json(users)));
+app.get('/vehicles', (req, res) => db.vehicles.findAll().then(vehicles => res.json(vehicles)));
+app.get('/technical_reviews', (req, res) => db.technical_reviews.findAll().then(technical_reviews => res.json(technical_reviews)));
 app.get('/failures', (req, res) => db.failures.findAll().then(failures => res.json(failures)));
-app.get('/technical_reviews/:id' , (req, res) =>  db.tehnicki_pregledi.finfOne({
+app.get('/technical_reviews/:id' , (req, res) =>  db.technical_reviews.finfOne({
     where: {   id: req.params.id }})   
 );
 app.get('/users/:id' , (req, res) =>  db.users.finfOne({
@@ -62,25 +62,25 @@ app.delete('/deleteVehicles/:id' , (req, res) =>  db.vehicles.destroy({
 
 // ****************************************** POST:
 app.post('/addUsers' , function(req, res)  {
-    if ( !req.body.naziv )
+    if ( !req.body.name )
         res.json({ error: 'Bad Data' })
     
     db.users.create(req.body).then( data => { res.send(data) });
 });
 app.post('/addReviews' , function(req, res)  {
-    if ( !req.body.stanje )
+    if ( !req.body.state )
         res.json({ error: 'Bad Data' })
     
     db.technical_reviews.create(req.body).then( data => { res.send(data) });
 });
 app.post('/addParts' , function(req, res)  {
-    if ( !req.body.naziv )
+    if ( !req.body.name)
         res.json({ error: 'Bad Data'})
     
     db.parts.create(req.body).then( data => { res.send(data) });
 });
 app.post('/addVehicles' , function(req, res)  {
-    if ( !req.body.naziv_vlasnika )
+    if ( !req.body.owner_name )
         res.json({ error: 'Bad Data' })
     
     db.vehicles.create(req.body).then( data => { res.send(data) });
@@ -125,5 +125,5 @@ app.put('/editReview/:id' , function(req, res)  {
 
 
 module.exports = app.listen(8080, () => {
-    console.log('Server radi...');
+    console.log('Server correct...');
 });

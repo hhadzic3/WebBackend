@@ -9,26 +9,26 @@ db.sequelize.sync({ force: true }).then(function () {
 
 function dataInit() {
     const paPromiseList = [
-        db.parts.create({id: 1, naziv: 'Kocnice'}),
-        db.parts.create({id: 2, naziv: 'Blatobrani'}),
-        db.parts.create({id: 3, naziv: 'Hauba'})
+        db.parts.create({id: 1, name: 'Kocnice'}),
+        db.parts.create({id: 2, name: 'Blatobrani'}),
+        db.parts.create({id: 3, name: 'Hauba'})
     ];
     const usersPromiseList = [
-        db.users.create({id: 1,ime: "Hamo",prezime: "Hamic",uloga: "radnik",jmbg: "1231231312313",datum_rodjenja: "1.1.1999",adresa: "Hame polovine 12",postanski_broj: "71000",mail: "Hamo@gmail.com",broj_telefona: "061-111-111",naziv: "Hamo",lozinka: "Hamo"}),
-        db.users.create({id: 2,ime: "Mujo",prezime: "Mujic",uloga: "menadzer",jmbg: "88888882313",datum_rodjenja: "1.1.1999",adresa: "Bakije 12",postanski_broj: "71000",mail: "Mujo@gmail.com",broj_telefona: "061-111-221",naziv: "mujo",lozinka: "mujon"})
+        db.users.create({id: 1,first name: "Hamo",last name: "Hamic",position: "radnik",jmbg: "1231231312313",birth_date: "1.1.1999",adress: "Hame polovine 12",zip_code: "71000",mail: "Hamo@gmail.com",phone_number: "061-111-111",name: "Hamo",password: "Hamo"}),
+        db.users.create({id: 2,first name: "Mujo", last name: "Mujic", position: "menadzer",jmbg: "88888882313",birth_date: "1.1.1999",adress: "Bakije 12",zip_code: "71000",mail: "Mujo@gmail.com",phone_number: "061-111-221",name: "mujo",password: "mujon"})
     ];
     const vehiclesPromiseList = [
-        db.vehicles.create({id: 1,  naziv_vlasnika: "Hamo",marka: "Mercedes",tip: "teretno",
-        serijski_broj: "2142412",godina_proizvodnje: 1999,datum_upotrebe: '1.1.2000',prethodna_inspekcija: '3.3.2019'}),
-        db.vehicles.create({id: 2,  naziv_vlasnika: "Memo",marka: "BMW",tip: "putnicko",
-        serijski_broj: "33312",godina_proizvodnje: 2016,datum_upotrebe: '2.2.2000',prethodna_inspekcija: '5.5.2019'})
+        db.vehicles.create({id: 1,  owner_name: "Hamo",brand: "Mercedes",type: "teretno",
+        serial_number: "2142412",production_year: 1999,date_of_use: '1.1.2000',previous_inspection: '3.3.2019'}),
+        db.vehicles.create({id: 2,  owner_name: "Memo",brand: "BMW",type: "putnicko",
+        serial_number: "33312",production_year: 2016,date_of_use: '2.2.2000',previous_inspection: '5.5.2019'})
     ];
     const failuresPromiseList = [
-        db.failures.create({id: 1,  naziv: "motor",vozilo: 1}),
-        db.failures.create({id: 2,  naziv: "kocnice",vozilo: 1})
+        db.failures.create({id: 1,  name: "motor",vehicle: 1}),
+        db.failures.create({id: 2,  name: "kocnice",vehicle: 1})
     ];
     const technical_reviewsPromiseList = [
-        db.technical_reviews.create({id: 1,stanje: "zavrsen", vrsta: "vanredni" ,odgovorna_osoba:1, vozilo:1 } )  
+        db.technical_reviews.create({id: 1,state: "zavrsen", kind: "vanredni" ,responsible_person:1, vehicle:1 } )
     ];
 
     return new Promise((resolve, reject) => {
