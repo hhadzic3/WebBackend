@@ -8,7 +8,7 @@ db.sequelize.sync({ force: true }).then(function () {
 });
 
 function dataInit() {
-    const paPromiseList = [
+    const partsPromiseList = [
         db.parts.create({id: 1, name: 'Kocnice'}),
         db.parts.create({id: 2, name: 'Blatobrani'}),
         db.parts.create({id: 3, name: 'Hauba'})
