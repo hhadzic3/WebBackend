@@ -9,21 +9,21 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true
         },
-        ime: DataTypes.STRING,
-        prezime: DataTypes.STRING,
-        uloga: {
+        firs name: DataTypes.STRING,
+        last name: DataTypes.STRING,
+        position: {
             type: Sequelize.STRING,
             validate:{ isIn: [["radnik","menadzer","administrator"]] }
             
         },
         jmbg: DataTypes.STRING,
-        datum_rodjenja: DataTypes.DATE,
-        adresa: DataTypes.STRING,
-        postanski_broj: DataTypes.STRING,
+        date_of_birth: DataTypes.DATE,
+        adress: DataTypes.STRING,
+        zip_code: DataTypes.STRING,
         mail: DataTypes.STRING,
-        broj_telefona: DataTypes.STRING,
-        naziv: DataTypes.STRING,
-        lozinka: DataTypes.STRING,
+        number_phone: DataTypes.STRING,
+        name: DataTypes.STRING,
+        password: DataTypes.STRING,
     }, {
         sequelize,
         tableName: 'korisnici',
