@@ -11,7 +11,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         owner_name: DataTypes.STRING,
         brand: DataTypes.STRING,
-        tip: {
+        type: {
             type: Sequelize.STRING,
             validate: {
                 isIn: [["putnicko", "teretno","prikljucno"]]

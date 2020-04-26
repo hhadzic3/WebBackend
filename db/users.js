@@ -17,12 +17,12 @@ module.exports = function (sequelize, DataTypes) {
             
         },
         jmbg: DataTypes.STRING,
-        date_of_birth: DataTypes.DATE,
+        birth_date: DataTypes.DATE,
         adress: DataTypes.STRING,
         zip_code: DataTypes.STRING,
         mail: DataTypes.STRING,
-        number_phone: DataTypes.STRING,
-        name: DataTypes.STRING,
+        phone_number: DataTypes.STRING,
+        user_name: DataTypes.STRING,
         password: DataTypes.STRING,
     }, {
         sequelize,
