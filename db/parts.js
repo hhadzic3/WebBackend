@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true
         },
-        naziv: DataTypes.STRING,
+        name: DataTypes.STRING,
     }, {
         sequelize,
         tableName: 'dijelovi',
