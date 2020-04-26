@@ -9,8 +9,8 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true
         },
-        naziv: DataTypes.STRING,
-        vozilo: DataTypes.INTEGER
+        name: DataTypes.STRING,
+        vehicle: DataTypes.INTEGER
     }, {
         sequelize,
         tableName: 'kvarovi',
