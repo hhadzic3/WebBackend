@@ -9,18 +9,18 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true
         },
-        naziv_vlasnika: DataTypes.STRING,
-        marka: DataTypes.STRING,
+        owner_name: DataTypes.STRING,
+        brand: DataTypes.STRING,
         tip: {
             type: Sequelize.STRING,
             validate: {
                 isIn: [["putnicko", "teretno","prikljucno"]]
             }
         },
-        serijski_broj: DataTypes.STRING,
-        godina_proizvodnje: DataTypes.INTEGER,
-        datum_upotrebe: DataTypes.DATE,
-        prethodna_inspekcija: DataTypes.DATE
+        serial_number: DataTypes.STRING,
+        production_year: DataTypes.INTEGER,
+        date_of_use: DataTypes.DATE,
+        previous_inspection: DataTypes.DATE
     }, {
         sequelize,
         tableName: 'vozila',
