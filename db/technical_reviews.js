@@ -9,20 +9,20 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true
         },
-        stanje: {
+        state: {
             type: Sequelize.STRING,
             validate: {
                 isIn: [["na pregledu", "zavrsen","arhiviran"]]
             }
         },
-        vrsta: {
+        kind: {
             type: Sequelize.STRING,
             validate: {
                 isIn: [[ "redovni", 'vanredni','preventivni' ]]
             }
         },
-        odgovorna_osoba: DataTypes.INTEGER,
-        vozilo: DataTypes.INTEGER
+        responsible_person: DataTypes.INTEGER,
+        vehicle: DataTypes.INTEGER
     }, {
         sequelize,
         tableName: 'tehnicki_pregledi',
