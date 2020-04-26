@@ -26,17 +26,17 @@ function dataInit() {
         serial_number: "33312",production_year: 2016,date_of_use: '2.2.2000',previous_inspection: '5.5.2019'})
     ];
     const failuresPromiseList = [
-        db.failures.create({id: 1,  name: "motor",vehicle: 1}),
-        db.failures.create({id: 2,  name: "kocnice",vehicle: 1})
+        db.failures.create({id: 1, name: "motor", vehicle: 1 }),
+        db.failures.create({id: 2, name: "kocnice", vehicle: 1 })
     ];
     const technical_reviewsPromiseList = [
-        db.technical_reviews.create({id: 1,state: "zavrsen", kind: "vanredni" ,responsible_person:1, vehicle:1 } )
+        db.technical_reviews.create( { id:1 , state:"na pregledu", kind: "vanredni", responsible_person:1, vehicle:1 } )
     ];
 
     return new Promise((resolve, reject) => {
         Promise.all(usersPromiseList)
+            .then(() => Promise.all(technical_reviewsPromiseList).then(all => resolve(all))) 
             .then(() => Promise.all(partsPromiseList).then(all => resolve(all)))
-            .then(() => Promise.all(technical_reviewsPromiseList).then(all => resolve(all)))
             .then(() => Promise.all(vehiclesPromiseList).then(all => resolve(all)))
             .then(() => Promise.all(failuresPromiseList).then(all => resolve(all)))
             .catch(reason => reject(reason));
