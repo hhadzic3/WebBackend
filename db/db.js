@@ -7,22 +7,22 @@ db.sequelize = sequelize;
 db.Op = Sequelize.Op;
 
 // Import modela
-db.parts = sequelize.import(__dirname + '/dijelovi.js');
-db.users = sequelize.import(__dirname + '/korisnici.js');
-db.failures = sequelize.import(__dirname + '/kvarovi.js');
-db.technical_reviews = sequelize.import(__dirname + '/tehnicki_pregledi.js');
-db.vehicles = sequelize.import(__dirname + '/vozila.js');
+db.parts = sequelize.import(__dirname + '/parts.js');
+db.users = sequelize.import(__dirname + '/users.js');
+db.failures = sequelize.import(__dirname + '/vehicles.js');
+db.technical_reviews = sequelize.import(__dirname + '/technical_reviews.js');
+db.vehicles = sequelize.import(__dirname + '/vehicles.js');
 
 // Definisanje relacija
 
 // Korisnik <--> Pregled
-db.users.hasOne(db.technical_reviews, {foreignKey: {name: 'odgovorna_osoba'}});
-db.technical_reviews.belongsTo(db.users, {as: 'zaduzenaOsobaa', foreignKey: {name: 'odgovorna_osoba'}});
+db.users.hasOne(db.technical_reviews, {foreignKey: {name: 'responsible_person'}});
+db.technical_reviews.belongsTo(db.users, {as: 'zaduzenaOsobaa', foreignKey: {name: 'responsible_person'}});
 // Vozilo <--> Pregledi
-db.vehicles.hasMany(db.technical_reviews, {foreignKey: {name: 'vozilo'}});
-db.technical_reviews.belongsTo(db.vehicles, {as: 'zaduzenoVozilo', foreignKey: {name: 'vozilo'}});
+db.vehicles.hasMany(db.technical_reviews, {foreignKey: {name: 'vehicle'}});
+db.technical_reviews.belongsTo(db.vehicles, {as: 'zaduzenoVozilo', foreignKey: {name: 'vehicle'}});
 // Vozilo <--> Kvarovi
-db.vehicles.hasMany(db.kvarovi, {foreignKey: {name: 'vozilo'}});
-db.failures.belongsTo(db.vozila, {as: 'kvaroviVozila', foreignKey: {name: 'vozilo'}});
+db.vehicles.hasMany(db.kvarovi, {foreignKey: {name: 'vehicle'}});
+db.failures.belongsTo(db.vozila, {as: 'kvaroviVozila', foreignKey: {name: 'vehicle'}});
 
 module.exports = db;
