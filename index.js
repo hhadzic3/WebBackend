@@ -24,13 +24,13 @@ app.get('/api/users/:id' , (req, res) =>  db.users.finfOne({
 );
 
 //  ****************************************** DELETE:
-app.delete('/api/deleteParts/:id' , (req, res) => db.parts.destroy({
+app.delete('/api/parts/:id' , (req, res) => db.parts.destroy({
     where: {   id: req.params.id     }
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){ console.log('Deleted successfully'); }}).then( () => { res.json({ status : 'Deleted!'}) })  
 );
 
-app.delete('/api/deleteUsers/:id' , (req, res) =>  db.users.destroy({
+app.delete('/api/users/:id' , (req, res) =>  db.users.destroy({
     where: {   id: req.params.id    }
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){
@@ -38,7 +38,7 @@ app.delete('/api/deleteUsers/:id' , (req, res) =>  db.users.destroy({
     }}, function(err){ console.log(err); }).then( () => { res.json({ status : 'Deleted!'}) })  
 );
 
-app.delete('/api/deleteFailures/:id' , (req, res) =>  db.failures.destroy({
+app.delete('/api/failures/:id' , (req, res) =>  db.failures.destroy({
     where: {   id: req.params.id }
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){
@@ -46,14 +46,14 @@ app.delete('/api/deleteFailures/:id' , (req, res) =>  db.failures.destroy({
     }}, function(err){console.log(err); }).then( () => { res.json({ status : 'Deleted!'}) })
 );
 
-app.delete('/api/deleteTechnical_reviews/:id' , (req, res) =>  db.technical_reviews.destroy({
+app.delete('/api/technical_reviews/:id' , (req, res) =>  db.technical_reviews.destroy({
     where: {   id: req.params.id }
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){
       console.log('Deleted successfully');
     }}, function(err){console.log(err);  })  .then( () => { res.json({ status : 'Deleted!'}) }) 
 );
-app.delete('/api/deleteVehicles/:id' , (req, res) =>  db.vehicles.destroy({
+app.delete('/api/vehicles/:id' , (req, res) =>  db.vehicles.destroy({
     where: {   id: req.params.id}
  }).then(function(rowDeleted){ 
    if(rowDeleted === 1){console.log('Deleted successfully');}}, function(err){console.log(err); 
@@ -61,31 +61,31 @@ app.delete('/api/deleteVehicles/:id' , (req, res) =>  db.vehicles.destroy({
 );
 
 // ****************************************** POST:
-app.post('/api/addUsers' , function(req, res)  {
+app.post('/api/users' , function(req, res)  {
     if ( !req.body.first_name )
         res.json({ error: 'Bad Data' })
     
     db.users.create(req.body).then( data => { res.send(data) });
 });
-app.post('/api/addReviews' , function(req, res)  {
+app.post('/api/reviews' , function(req, res)  {
     if ( !req.body.state )
         res.json({ error: 'Bad Data' })
     
     db.technical_reviews.create(req.body).then( data => { res.send(data) });
 });
-app.post('/api/addParts' , function(req, res)  {
+app.post('/api/parts' , function(req, res)  {
     if ( !req.body.name)
         res.json({ error: 'Bad Data'})
     
     db.parts.create(req.body).then( data => { res.send(data) });
 });
-app.post('/api/addVehicles' , function(req, res)  {
+app.post('/api/vehicles' , function(req, res)  {
     if ( !req.body.owner_name )
         res.json({ error: 'Bad Data' })
     
     db.vehicles.create(req.body).then( data => { res.send(data) });
 });
-app.post('/api/addFailures' , function(req, res)  {
+app.post('/api/failures' , function(req, res)  {
     if ( !req.body )
         res.json({ error:'Bad Data' })
     
@@ -93,7 +93,7 @@ app.post('/api/addFailures' , function(req, res)  {
 });
 
 // ********************************************** PUT:
-app.put('/api/editVehicles/:id' , function(req, res)  {
+app.put('/api/vehicles/:id' , function(req, res)  {
     if ( !req.body.brand )
         res.json({ error: 'Bad Data' })
         
@@ -110,7 +110,7 @@ app.put('/api/editVehicles/:id' , function(req, res)  {
     ).then( () => { res.json({ status : 'Updated!'}) });
 });
 
-app.put('/api/editReview/:id' , function(req, res)  {
+app.put('/api/review/:id' , function(req, res)  {
     if ( !req.body.state )
         res.json({ error: 'Bad Data' })
     
