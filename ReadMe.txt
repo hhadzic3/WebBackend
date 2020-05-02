@@ -1,3 +1,5 @@
+❮img src="icons/express2.jpg" width="100" ❯
+❮img src="icons/sequelize.png" width="100" ❯
 ->  Kreirati bazu sa nazivom DBINSPECTION u phpMyAdmin-u baza MySQL
     username i password na bazu su u ovom primjeru root,root, mozete ih promijeniti u db.js
 
