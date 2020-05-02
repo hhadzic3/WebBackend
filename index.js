@@ -7,7 +7,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/api', function (req, res) {
-    res.sendFile(__dirname + '/api.html');
+    var welcome ="<h1>Welcome to the server side!</h1>"  + "<h3>GET, POST, PUT, DELETE!</h3>" ;
+    res.send(welcome + "<ul> <li> /user </li> <li> /vehicle </li> <li> /review </li> <li> /part </li> <li> /failure </li>  </ul>");
 });
 
 // ************************************ GET:
