@@ -62,7 +62,7 @@ app.delete('/api/vehicle/:id' , (req, res) =>  db.vehicles.destroy({
 
 // ****************************************** POST:
 app.post('/api/user' , function(req, res)  {
-    if ( !req.body.first_name )
+    if ( !req.body.user_name || !req.body.password )
         res.json({ error: 'Bad Data' })
     
     db.users.create(req.body).then( data => { res.send(data) });
