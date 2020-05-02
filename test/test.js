@@ -23,8 +23,8 @@ describe('Testiranje servera', function() {
         user_name: "muki",
         password: "miki"
     }
-    let vehicle = { owner_name: "John",brand: "BMV",type: "putnicko",
-            serial_number: "999412",production_year: 2020,date_of_use: '1.1.2020',previous_inspection: '3.3.2020'};
+    let vehicle = { id:69,owner_name: "John",brand: "BMV",type: "putnicko",
+            serial_number: "999412",production_year: 2020,date_of_use: '1.1.2020',previous_inspection: '3.3.2017'};
     
             describe('GET', ()=> {
         it('GET /api/user', (done) => {
@@ -146,6 +146,69 @@ describe('Testiranje servera', function() {
         });
     });
 
+    describe('/GET/:id ', () => {
+        it('it should GET a vehicle given the id', (done) => {
+            chai.request(app)
+            .get('/api/vehicle/' + vehicle.id)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('owner_name').eql('John');
+                done();
+            });
+        });
+        
+        it('it should GET a review given the id', (done) => {
+            chai.request(app)
+            .get('/api/review/' + review.id)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('kind').eql('redovni');
+                done();
+            });
+        });
+        it('it should GET a user given the id', (done) => {
+            chai.request(app)
+            .get('/api/user/' + user.id)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('user_name').eql('muki');
+                done();
+            });
+        });
+    });
+
+
+    describe('/PUT/:id ', () => {
+        it('it should PUT a vehicle given the id', (done) => {
+            chai.request(app)
+            .put('/api/vehicle/' + vehicle.id)
+            .send({owner_name: "John",brand: "BMV",type: "putnicko",
+            serial_number: "999412",production_year: 2020,date_of_use: '1.1.2020',previous_inspection: '5.5.2020'})
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql('Updated!');
+                done();
+            });
+        });
+        
+        it('it should PUT a review given the id', (done) => {
+            chai.request(app)
+            .put('/api/review/' + review.id)
+            .send({state:"arhiviran", kind: "redovni", responsible_person:2, vehicle:2})
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql('Updated!');
+                done();
+            });
+        });
+    });
+
+
     describe('/DELETE/:id ', () => {
         
         it('it should DELETE a user given the id', (done) => {
@@ -198,12 +261,7 @@ describe('Testiranje servera', function() {
                 done();
             });
         });
-
-
-
     });
-
-
 
 
 });

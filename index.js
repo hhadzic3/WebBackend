@@ -17,48 +17,38 @@ app.get('/api/user', (req, res) => db.users.findAll().then(users => res.json(use
 app.get('/api/vehicle', (req, res) => db.vehicles.findAll().then(vehicles => res.json(vehicles)));
 app.get('/api/review', (req, res) => db.technical_reviews.findAll().then(technical_reviews => res.json(technical_reviews)));
 app.get('/api/failure', (req, res) => db.failures.findAll().then(failures => res.json(failures)));
-app.get('/api/review/:id' , (req, res) =>  db.technical_reviews.finfOne({
-    where: {   id: req.params.id }})   
+app.get('/api/review/:id' , (req, res) =>  db.technical_reviews.findOne({
+    where: {   id: req.params.id }}).then( data => { res.send(data) })   
 );
-app.get('/api/user/:id' , (req, res) =>  db.users.finfOne({
-    where: {   id: req.params.id }})   
+app.get('/api/user/:id' , (req, res) =>  db.users.findOne({
+    where: {   id: req.params.id }}).then( data => { res.send(data)})   
 );
-
+app.get('/api/vehicle/:id' , (req, res) =>  db.vehicles.findOne({
+    where: {   id: req.params.id }}).then( data => { res.send(data)})   
+);
 //  ****************************************** DELETE:
 app.delete('/api/part/:id' , (req, res) => db.parts.destroy({
     where: {   id: req.params.id     }
- }).then(function(rowDeleted){ 
-   if(rowDeleted === 1){ console.log('Deleted successfully'); }}).then( () => { res.json({ status : 'Deleted!'}) })  
+ }).then( () => { res.json({ status : 'Deleted!'}) })  
 );
 
 app.delete('/api/user/:id' , (req, res) =>  db.users.destroy({
     where: {   id: req.params.id    }
- }).then(function(rowDeleted){ 
-   if(rowDeleted === 1){
-      console.log('Deleted successfully');
-    }}, function(err){ console.log(err); }).then( () => { res.json({ status : 'Deleted!'}) })  
+ }).then( () => { res.json({ status : 'Deleted!'}) })  
 );
 
 app.delete('/api/failure/:id' , (req, res) =>  db.failures.destroy({
     where: {   id: req.params.id }
- }).then(function(rowDeleted){ 
-   if(rowDeleted === 1){
-      console.log('Deleted successfully');
-    }}, function(err){console.log(err); }).then( () => { res.json({ status : 'Deleted!'}) })
+ }).then( () => { res.json({ status : 'Deleted!'}) })
 );
 
 app.delete('/api/review/:id' , (req, res) =>  db.technical_reviews.destroy({
     where: {   id: req.params.id }
- }).then(function(rowDeleted){ 
-   if(rowDeleted === 1){
-      console.log('Deleted successfully');
-    }}, function(err){console.log(err);  })  .then( () => { res.json({ status : 'Deleted!'}) }) 
+ }).then( () => { res.json({ status : 'Deleted!'}) }) 
 );
 app.delete('/api/vehicle/:id' , (req, res) =>  db.vehicles.destroy({
     where: {   id: req.params.id}
- }).then(function(rowDeleted){ 
-   if(rowDeleted === 1){console.log('Deleted successfully');}}, function(err){console.log(err); 
-}).then( () => { res.json({ status : 'Deleted!'}) })
+ }).then( () => { res.json({ status : 'Deleted!'}) })
 );
 
 // ****************************************** POST:
