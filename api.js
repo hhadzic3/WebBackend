@@ -52,7 +52,10 @@ router.post('/user' , function(req, res)  {
     if ( !req.body.user_name || !req.body.password )
         res.json({ error: 'Bad Data' })
     
-    db.users.create(req.body).then( data => { res.send(data) });
+    db.users.create(req.body)
+    .then( data => { res.send(data) })
+    .catch( function (err) {
+        res.sendStatus(500)});
 });
 router.post('/review' , function(req, res)  {
     if ( !req.body.state )

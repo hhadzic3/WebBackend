@@ -20,11 +20,22 @@ module.exports = function (sequelize, DataTypes) {
         birth_date: DataTypes.DATE,
         adress: DataTypes.STRING,
         zip_code: DataTypes.STRING,
-        mail: DataTypes.STRING,
+        mail: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+          },
         phone_number: DataTypes.STRING,
-        user_name:Sequelize.STRING, // todo: dodati validaciju za UNIQUE
-        password: Sequelize.STRING,
-           
+        user_name:{
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+          }, 
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+          },
     }, {
         sequelize,
         tableName: 'users',

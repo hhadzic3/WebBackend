@@ -23,6 +23,20 @@ describe('Testiranje servera', function() {
         user_name: "muki",
         password: "miki"
     }
+    let user2 = {
+        id:44,
+        first_name: "Miki",
+        last_name: "Mustafic",
+        position: "administrator",
+        jmbg: "88855582313",
+        birth_date: "1.1.2002",
+        adress: "Bakije 12",
+        zip_code: "71000",
+        mail: "Mikica@gmail.com",
+        phone_number: "061-333-221",
+        user_name: "muki",
+        password: "miki"
+    }
     let vehicle = { id:69,owner_name: "John",brand: "BMV",type: "putnicko",
             serial_number: "999412",production_year: 2020,date_of_use: '1.1.2020',previous_inspection: '3.3.2017'};
     
@@ -93,6 +107,15 @@ describe('Testiranje servera', function() {
                 res.body.should.be.a('object');
                 res.body.should.have.property('user_name');
                 res.body.should.have.property('password');
+                done();
+            }); 
+        });
+        it('POST /api/user duplicated ERROR!', (done) => {
+            chai.request(app)
+            .post('/api/user')
+            .send(user2)
+            .end((err, res) => {
+                res.should.have.status(500);
                 done();
             }); 
         });
