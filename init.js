@@ -26,8 +26,8 @@ function dataInit() {
         serial_number: "33312",production_year: 2016,date_of_use: '2.2.2000',previous_inspection: '5.5.2019'})
     ];
     const failuresPromiseList = [
-        db.failures.create({id: 1, name: "motor", vehicle: 1 }),
-        db.failures.create({id: 2, name: "kocnice", vehicle: 1 })
+        db.failures.create({id: 1, name: "motor", vehicle: 1 , accurrence_date: '2.2.2015',repair_date: null}),
+        db.failures.create({id: 2, name: "kocnice", vehicle: 1, accurrence_date: '2.2.2015',repair_date: null })
     ];
     const technical_reviewsPromiseList = [
         db.technical_reviews.create( { id:1 , state:"na pregledu", kind: "vanredni", responsible_person:1, vehicle:1 } )

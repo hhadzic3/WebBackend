@@ -10,7 +10,9 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
         name: DataTypes.STRING,
-        vehicle: DataTypes.INTEGER
+        vehicle: DataTypes.INTEGER,
+        accurrence_date: DataTypes.DATE,
+        repair_date: DataTypes.DATE
     }, {
         sequelize,
         tableName: 'failures',

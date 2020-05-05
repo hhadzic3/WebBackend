@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 describe('Testiranje servera', function() {
     let part = {id:69,name: 'Brisaci'} 
     let review = { id:69,state:"zavrsen", kind: "redovni", responsible_person:2, vehicle:2 }
-    let failure = { id:69, name: "mjenjac", vehicle: 2 } 
+    let failure = { id:69, name: "mjenjac", vehicle: 2, accurrence_date: '2.2.2015',repair_date: null } 
     let user = {
         id:69,
         first_name: "Miki",
