@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
         type: {
             type: Sequelize.STRING,
             validate: {
-                isIn: [["putnicko", "teretno","prikljucno"]]
+                isIn : [["TERETNO", "PUTNICKO", "PRIKLJUCNO", "TRAILER_VEHICLE", "PASSENGER_VEHICLE", "TRUCK"]]
             }
         },
         serial_number: DataTypes.STRING,

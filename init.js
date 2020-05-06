@@ -20,9 +20,9 @@ function dataInit() {
         birth_date: "1.1.1999",adress: "Bakije 12",zip_code: "71000",mail: "Mujo@gmail.com",phone_number: "061-111-221",user_name: "mujo",password: "mujon"})
     ];
     const vehiclesPromiseList = [
-        db.vehicles.create({id: 1,  owner_name: "Hamo",brand: "Mercedes",type: "teretno",
+        db.vehicles.create({id: 1,  owner_name: "Hamo",brand: "Mercedes",type: "TERETNO",
         serial_number: "2142412",production_year: 1999,date_of_use: '1.1.2000',previous_inspection: '3.3.2019'}),
-        db.vehicles.create({id: 2,  owner_name: "Memo",brand: "BMW",type: "putnicko",
+        db.vehicles.create({id: 2,  owner_name: "Memo",brand: "BMW",type: "PUTNICKO",
         serial_number: "33312",production_year: 2016,date_of_use: '2.2.2000',previous_inspection: '5.5.2019'})
     ];
     const failuresPromiseList = [
