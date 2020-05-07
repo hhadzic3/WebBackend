@@ -37,7 +37,7 @@ describe('Testiranje servera', function() {
         user_name: "muki",
         password: "miki"
     }
-    let vehicle = { id:69,owner_name: "John",brand: "BMV",type: "putnicko",
+    let vehicle = { id:69,owner_name: "John",brand: "BMV",type: "PUTNICKO",
             serial_number: "999412",production_year: 2020,date_of_use: '1.1.2020',previous_inspection: '3.3.2017'};
     
             describe('GET', ()=> {
@@ -208,7 +208,7 @@ describe('Testiranje servera', function() {
         it('it should PUT a vehicle given the id', (done) => {
             chai.request(app)
             .put('/api/vehicle/' + vehicle.id)
-            .send({owner_name: "John",brand: "BMV",type: "putnicko",
+            .send({owner_name: "John",brand: "BMV",type: "PUTNICKO",
             serial_number: "999412",production_year: 2020,date_of_use: '1.1.2020',previous_inspection: '5.5.2020'})
             .end((err, res) => {
                 res.should.have.status(200);
