@@ -12,13 +12,13 @@ module.exports = function (sequelize, DataTypes) {
         state: {
             type: Sequelize.STRING,
             validate: {
-                isIn: [["na pregledu", 'zavrsen','arhiviran']]
+                isIn: [['NA PREGLEDU', 'ZAVRSEN','NA CEKANJU', 'U ARHIVI', 'ON_HOLD', 'IN PROGRESS', 'DONE', 'IN ARCHIVE']]
             }
         },
         kind: {
             type: Sequelize.STRING,
             validate: {
-                isIn: [[ "redovni", 'vanredni','preventivni' ]]
+                isIn: [[ 'REGULARNI', 'PREVENTIVNI','VANREDNI', 'REGULAR', 'PREVENTIVE', 'EXTRAORDINARY']]
             }
         },
         responsible_person: DataTypes.INTEGER,

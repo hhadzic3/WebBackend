@@ -30,7 +30,7 @@ function dataInit() {
         db.failures.create({id: 2, name: "kocnice", vehicle: 1, accurrence_date: '2.2.2015',repair_date: null })
     ];
     const technical_reviewsPromiseList = [
-        db.technical_reviews.create( { id:1 , state:"na pregledu", kind: "vanredni", responsible_person:1, vehicle:1 } )
+        db.technical_reviews.create( { id:1 , state:'NA PREGLEDU', kind: 'VANREDNI', responsible_person:1, vehicle:1 } )
     ];
 
     return new Promise((resolve, reject) => {

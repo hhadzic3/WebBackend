@@ -6,8 +6,8 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('Testiranje servera', function() {
-    let part = {id: 69, name: 'Brisaci', availability: 1} 
-    let review = { id:69,state:"zavrsen", kind: "redovni", responsible_person:2, vehicle:2 }
+    let part = {id: 69, name: 'Brisaci', availability: true} 
+    let review = { id:69,state:'ZAVRSEN', kind: "REGULARNI", responsible_person:2, vehicle:2 }
     let failure = { id:69, name: "mjenjac", vehicle: 2, accurrence_date: '2.2.2015',repair_date: null } 
     let user = {
         id:69,
@@ -181,7 +181,7 @@ describe('Testiranje servera', function() {
                 done();
             });
         });
-        
+
         it('it should GET a vehicle given the id', (done) => {
             chai.request(app)
             .get('/api/vehicle/' + vehicle.id)
@@ -199,7 +199,7 @@ describe('Testiranje servera', function() {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                res.body.should.have.property('kind').eql('redovni');
+                res.body.should.have.property('kind').eql('REGULARNI');
                 done();
             });
         });
@@ -224,7 +224,7 @@ describe('Testiranje servera', function() {
         it('it should PUT a review given the id', (done) => {
             chai.request(app)
             .put('/api/review/' + review.id)
-            .send({state:"arhiviran", kind: "redovni", responsible_person:2, vehicle:2})
+            .send({state:"U ARHIVI", kind: "REGULARNI", responsible_person:2, vehicle:2})
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
