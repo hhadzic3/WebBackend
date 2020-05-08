@@ -10,6 +10,7 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
         name: DataTypes.STRING,
+        availability: DataTypes.INTEGER
     }, {
         sequelize,
         tableName: 'parts',

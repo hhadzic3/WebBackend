@@ -9,5 +9,5 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api', api);
 
 module.exports = app.listen(8080, () => {
-    console.log('Server is working...');
+    console.log('Server is working on http://localhost:8080/api');
 });

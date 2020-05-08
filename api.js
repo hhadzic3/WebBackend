@@ -16,7 +16,7 @@ router.get('/failure', (req, res) => db.failures.findAll().then(failures => res.
 router.get('/review/:id' , (req, res) =>  db.technical_reviews.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data) })   
 );
-router.get('/user/ 	:id' , (req, res) =>  db.users.findOne({
+router.get('/user/:id' , (req, res) =>  db.users.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data)})   
 );
 router.get('/vehicle/:id' , (req, res) =>  db.vehicles.findOne({

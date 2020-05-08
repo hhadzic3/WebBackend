@@ -6,7 +6,7 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('Testiranje servera', function() {
-    let part = {id:69,name: 'Brisaci'} 
+    let part = {id: 69, name: 'Brisaci', availability: 1} 
     let review = { id:69,state:"zavrsen", kind: "redovni", responsible_person:2, vehicle:2 }
     let failure = { id:69, name: "mjenjac", vehicle: 2, accurrence_date: '2.2.2015',repair_date: null } 
     let user = {
@@ -119,6 +119,19 @@ describe('Testiranje servera', function() {
                 done();
             }); 
         });
+        it('POST /api/vehicle', (done) => {
+            
+            chai.request(app)
+            .post('/api/vehicle')
+            .send(vehicle)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('owner_name');
+                res.body.should.have.property('type');
+                done();
+            }); 
+        });
         it('POST /api/failure', (done) => {
             chai.request(app)
             .post('/api/failure')
@@ -154,22 +167,21 @@ describe('Testiranje servera', function() {
                 done();
             }); 
         });
-        it('POST /api/vehicle', (done) => {
-            
-            chai.request(app)
-            .post('/api/vehicle')
-            .send(vehicle)
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('owner_name');
-                res.body.should.have.property('type');
-                done();
-            }); 
-        });
+        
     });
 
     describe('/GET/:id ', () => {
+        it('it should GET a user given the id', (done) => {
+            chai.request(app)
+            .get('/api/user/' + user.id)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('user_name').eql('muki');
+                done();
+            });
+        });
+        
         it('it should GET a vehicle given the id', (done) => {
             chai.request(app)
             .get('/api/vehicle/' + vehicle.id)
@@ -191,16 +203,7 @@ describe('Testiranje servera', function() {
                 done();
             });
         });
-        it('it should GET a user given the id', (done) => {
-            chai.request(app)
-            .get('/api/user/' + user.id)
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('user_name').eql('muki');
-                done();
-            });
-        });
+        
     });
 
 
