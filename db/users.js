@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
         last_name: DataTypes.STRING,
         position: {
             type: Sequelize.STRING,
-            validate:{ isIn: [["radnik","menadzer","administrator"]] }
+            validate:{ isIn: [["RADNIK","MENADZER","ADMINISTRATOR", "EMPLOYEE", "MENAGER", "ADMIN"]] }
             
         },
         jmbg: DataTypes.STRING,

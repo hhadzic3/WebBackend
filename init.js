@@ -14,9 +14,9 @@ function dataInit() {
         db.parts.create({id: 3, name: 'Hauba', availability: true})
     ];
     const usersPromiseList = [
-        db.users.create({id: 1,first_name: "Hamo",last_name: "Hamic",position: "radnik",jmbg: "1231231312313",
+        db.users.create({id: 1,first_name: "Hamo",last_name: "Hamic",position: "RADNIK",jmbg: "1231231312313",
         birth_date: "1.1.1999",adress: "Hame polovine 12",zip_code: "71000",mail: "Hamo@gmail.com",phone_number: "061-111-111",user_name: "Hamo",password: "Hamo"}),
-        db.users.create({id: 2,first_name: "Mujo", last_name: "Mujic", position: "menadzer",jmbg: "88888882313",
+        db.users.create({id: 2,first_name: "Mujo", last_name: "Mujic", position: "MENADZER",jmbg: "88888882313",
         birth_date: "1.1.1999",adress: "Bakije 12",zip_code: "71000",mail: "Mujo@gmail.com",phone_number: "061-111-221",user_name: "mujo",password: "mujon"})
     ];
     const vehiclesPromiseList = [
