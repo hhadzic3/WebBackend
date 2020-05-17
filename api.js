@@ -10,7 +10,11 @@ router.get('/', function (req, res) {
 
 // ************************************ GET:
 router.get('/part', (req, res) => db.parts.findAll().then(parts => res.json(parts)));
-router.get('/user', (req, res) => db.users.findAll().then(users => res.json(users)));
+router.get('/user', (req, res) => db.users.findAll({
+    attributes: {
+        exclude: ['password']
+    }
+}).then(users => res.json(users)));
 router.get('/vehicle', (req, res) => db.vehicles.findAll().then(vehicles => res.json(vehicles)));
 router.get('/review', (req, res) => db.technical_reviews.findAll().then(technical_reviews => res.json(technical_reviews)));
 router.get('/failure', (req, res) => db.failures.findAll().then(failures => res.json(failures)));
@@ -42,7 +46,7 @@ router.post('/login' , async function(req, res)  {
     var payload = {};
     var token = jwt.encode(payload , '123');
 
-    res.status(200).send({token});
+    return res.status(200).send({token});
 });
 
 router.post('/user' , function(req, res)  {

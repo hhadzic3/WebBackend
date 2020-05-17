@@ -6,6 +6,9 @@ var api = require('./api.js');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+var cors = require('cors')
+
+app.use(cors()) 
 app.use('/api', api);
 
 module.exports = app.listen(8080, () => {
