@@ -22,6 +22,11 @@ router.get('/user/:id' , (req, res) =>  db.users.findOne({
 router.get('/vehicle/:id' , (req, res) =>  db.vehicles.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data)})   
 );
+
+router.get('/user/:user_name/:password' , (req, res) =>  db.users.findOne({
+    where: {   user_name: req.params.user_name, password: req.params.password }}).then( data => { res.send(data)})
+);
+
 //  ****************************************** DELETE:
 router.delete('/part/:id' , (req, res) => db.parts.destroy({
     where: {   id: req.params.id     }
