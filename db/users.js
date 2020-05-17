@@ -16,7 +16,11 @@ module.exports = function (sequelize, DataTypes) {
             validate:{ isIn: [["RADNIK","MENADZER","ADMINISTRATOR", "EMPLOYEE", "MENAGER", "ADMIN"]] }
             
         },
-        jmbg: DataTypes.STRING,
+        jmbg: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+          },
         birth_date: DataTypes.DATE,
         adress: DataTypes.STRING,
         zip_code: DataTypes.STRING,

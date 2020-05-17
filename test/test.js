@@ -6,7 +6,7 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('Testiranje servera', function() {
-    let part = {id: 69, name: 'Brisaci', availability: true} 
+    let part = {id: 69, name: 'Brisaci', availability: "DOSTUPAN"} 
     let review = { id:69,state:'ZAVRSEN', kind: "REGULARNI", responsible_person:2, vehicle:2 }
     let failure = { id:69, name: "mjenjac", vehicle: 2, accurrence_date: '2.2.2015',repair_date: null } 
     let user = {
@@ -28,7 +28,7 @@ describe('Testiranje servera', function() {
         first_name: "Miki",
         last_name: "Mustafic",
         position: "ADMINISTRATOR",
-        jmbg: "88855582313",
+        jmbg: "88855002313",
         birth_date: "1.1.2002",
         adress: "Bakije 12",
         zip_code: "71000",

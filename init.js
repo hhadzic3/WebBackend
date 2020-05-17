@@ -9,9 +9,9 @@ db.sequelize.sync({ force: true }).then(function () {
 
 function dataInit() {
     const partsPromiseList = [
-        db.parts.create({id: 1, name: 'Kocnice', availability: true}),
-        db.parts.create({id: 2, name: 'Blatobrani', availability: false}),
-        db.parts.create({id: 3, name: 'Hauba', availability: true})
+        db.parts.create({id: 1, name: 'Kocnice', availability: "DOSTUPAN"}),
+        db.parts.create({id: 2, name: 'Blatobrani', availability: "DOSTUPAN"}),
+        db.parts.create({id: 3, name: 'Hauba', availability: "DOSTUPAN"})
     ];
     const usersPromiseList = [
         db.users.create({id: 1,first_name: "Hamo",last_name: "Hamic",position: "RADNIK",jmbg: "1231231312313",

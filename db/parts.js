@@ -10,7 +10,10 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
         name: DataTypes.STRING,
-        availability: DataTypes.BOOLEAN
+        availability: {
+            type: Sequelize.STRING,
+            validate:{ isIn: [["AVAILABLE","UNAVAILABLE", "DOSTUPAN", "NEDOSTUPAN"]] }
+        },
     }, {
         sequelize,
         tableName: 'parts',
