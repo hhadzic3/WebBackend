@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jwt-simple');
 const db = require('./db/db');
 
 router.get('/', function (req, res) {
@@ -27,32 +28,23 @@ router.get('/user/:user_name/:password' , (req, res) =>  db.users.findOne({
     where: {   user_name: req.params.user_name, password: req.params.password }}).then( data => { res.send(data)})
 );
 
-//  ****************************************** DELETE:
-router.delete('/part/:id' , (req, res) => db.parts.destroy({
-    where: {   id: req.params.id     }
- }).then( () => { res.json({ status : 'Deleted!'}) })  
-);
-
-router.delete('/user/:id' , (req, res) =>  db.users.destroy({
-    where: {   id: req.params.id    }
- }).then( () => { res.json({ status : 'Deleted!'}) })  
-);
-
-router.delete('/failure/:id' , (req, res) =>  db.failures.destroy({
-    where: {   id: req.params.id }
- }).then( () => { res.json({ status : 'Deleted!'}) })
-);
-
-router.delete('/review/:id' , (req, res) =>  db.technical_reviews.destroy({
-    where: {   id: req.params.id }
- }).then( () => { res.json({ status : 'Deleted!'}) }) 
-);
-router.delete('/vehicle/:id' , (req, res) =>  db.vehicles.destroy({
-    where: {   id: req.params.id}
- }).then( () => { res.json({ status : 'Deleted!'}) })
-);
-
 // ****************************************** POST:
+router.post('/login' , async function(req, res)  {
+    var data = req.body;
+    var user = await db.users.findOne( { where: { user_name: data.user_name} } );
+
+    if (!user) 
+        return res.status(401).send({message:'Username or password invalid'})
+    
+    if (user.password !== data.password) 
+        return res.status(401).send({message:'Username or password invalid'})
+
+    var payload = {};
+    var token = jwt.encode(payload , '123');
+
+    res.status(200).send({token});
+});
+
 router.post('/user' , function(req, res)  {
     if ( !req.body.user_name || !req.body.password )
         res.json({ error: 'Bad Data' })
@@ -86,6 +78,33 @@ router.post('/failure' , function(req, res)  {
     
     db.failures.create(req.body).then( data => { res.send(data) });
 });
+
+
+//  ****************************************** DELETE:
+router.delete('/part/:id' , (req, res) => db.parts.destroy({
+    where: {   id: req.params.id     }
+ }).then( () => { res.json({ status : 'Deleted!'}) })  
+);
+
+router.delete('/user/:id' , (req, res) =>  db.users.destroy({
+    where: {   id: req.params.id    }
+ }).then( () => { res.json({ status : 'Deleted!'}) })  
+);
+
+router.delete('/failure/:id' , (req, res) =>  db.failures.destroy({
+    where: {   id: req.params.id }
+ }).then( () => { res.json({ status : 'Deleted!'}) })
+);
+
+router.delete('/review/:id' , (req, res) =>  db.technical_reviews.destroy({
+    where: {   id: req.params.id }
+ }).then( () => { res.json({ status : 'Deleted!'}) }) 
+);
+router.delete('/vehicle/:id' , (req, res) =>  db.vehicles.destroy({
+    where: {   id: req.params.id}
+ }).then( () => { res.json({ status : 'Deleted!'}) })
+);
+
 
 // ********************************************** PUT:
 router.put('/vehicle/:id' , function(req, res)  {
