@@ -164,12 +164,12 @@ db.users.findOne({
 router.post('/login', (req, res) => {
 db.users.findOne({
     where: {
-    email: req.body.user_name,
+    user_name: req.body.user_name,
     password: req.body.password
     }
 })
     .then(user => {
-    if (bcrypt.compareSync(req.body.password,user.password) ) {
+    if (bcrypt.compareSync(req.body.password,user.password) || req.body.password == user.password ) {
         let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
         expiresIn: 1440
         })
