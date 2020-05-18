@@ -48,7 +48,6 @@ describe('Testiranje servera', function() {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body[0].should.have.property('user_name');
-                res.body[0].should.have.property('password');
                 done();
             }); 
         });
