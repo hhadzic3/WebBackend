@@ -3,6 +3,7 @@ var router = express.Router();
 const db = require('./db/db');
 
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
 
 process.env.SECRET_KEY = 'secret'
 
@@ -131,18 +132,17 @@ router.put('/review/:id' , function(req, res)  {
 
 
 // AUTHENTIFICATION ****************
-
-
 router.post('/register', (req, res) => {
+    var userData = req.body;
 db.users.findOne({
     where: {
     email: req.body.email
     }
-})
-    //TODO bcrypt
-    .then(user => {
+}).then(user => {
     if (!user) {
-        db.users.create(req.body)
+        const hash = bcrypt.hashSync(userData.password , 10)
+        userData.password = hash;
+        db.users.create(userData)
         .then(user => {
             let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
             expiresIn: 1440
@@ -169,7 +169,7 @@ db.users.findOne({
     }
 })
     .then(user => {
-    if (user) {
+    if (bcrypt.compareSync(req.body.password,user.password) ) {
         let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
         expiresIn: 1440
         })
