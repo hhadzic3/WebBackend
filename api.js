@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var jwt = require('jwt-simple');
 const db = require('./db/db');
+
+const jwt = require('jsonwebtoken')
+
+process.env.SECRET_KEY = 'secret'
 
 router.get('/', function (req, res) {
     var welcome ="<h1>Welcome to the server side!</h1>"  + "<h3>GET, POST, PUT, DELETE!</h3>" ;
@@ -33,21 +36,6 @@ router.get('/user/:user_name/:password' , (req, res) =>  db.users.findOne({
 );
 
 // ****************************************** POST:
-router.post('/login' , async function(req, res)  {
-    var data = req.body;
-    var user = await db.users.findOne( { where: { user_name: data.user_name} } );
-
-    if (!user) 
-        return res.status(401).send({message:'Username or password invalid'})
-    
-    if (user.password !== data.password) 
-        return res.status(401).send({message:'Username or password invalid'})
-
-    var payload = {};
-    var token = jwt.encode(payload , '123');
-
-    return res.status(200).send({token});
-});
 
 router.post('/user' , function(req, res)  {
     if ( !req.body.user_name || !req.body.password )
@@ -141,5 +129,77 @@ router.put('/review/:id' , function(req, res)  {
     ).then( () => { res.json({ status : 'Updated!'}) });
 });
 
+
+// AUTHENTIFICATION ****************
+
+
+router.post('/register', (req, res) => {
+db.users.findOne({
+    where: {
+    email: req.body.email
+    }
+})
+    //TODO bcrypt
+    .then(user => {
+    if (!user) {
+        db.users.create(req.body)
+        .then(user => {
+            let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+            expiresIn: 1440
+            })
+            res.json({ token: token })
+        })
+        .catch(err => {
+            res.send('error: ' + err)
+        })
+    } else {
+        res.json({ error: 'User already exists' })
+    }
+    })
+    .catch(err => {
+    res.send('error: ' + err)
+    })
+});
+
+router.post('/login', (req, res) => {
+db.users.findOne({
+    where: {
+    email: req.body.user_name,
+    password: req.body.password
+    }
+})
+    .then(user => {
+    if (user) {
+        let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+        expiresIn: 1440
+        })
+        res.json({ token: token })
+    } else {
+        res.send('User does not exist')
+    }
+    })
+    .catch(err => {
+    res.send('error: ' + err)
+    })
+})
+
+router.get('/profile', (req, res) => {
+var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+
+db.users.findOne({
+    where: {
+    id: decoded.id
+    }
+}).then(user => {
+    if (user) {
+        res.json(user)
+    } else {
+        res.send('User does not exist')
+    }
+    })
+    .catch(err => {
+    res.send('error: ' + err)
+    })
+});
 
 module.exports = router;
