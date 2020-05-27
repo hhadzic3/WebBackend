@@ -14,39 +14,19 @@ router.get('/', function (req, res) {
 
 // ************************************ GET:
 router.get('/part', (req, res) => db.parts.findAll().then(parts => res.json(parts)));
-router.get('/user', (req, res) => db.users.findAll({
-    attributes: {
-        exclude: ['password']
-    }
-}).then(users => res.json(users)));
 router.get('/vehicle', (req, res) => db.vehicles.findAll().then(vehicles => res.json(vehicles)));
 router.get('/review', (req, res) => db.technical_reviews.findAll().then(technical_reviews => res.json(technical_reviews)));
 router.get('/failure', (req, res) => db.failures.findAll().then(failures => res.json(failures)));
 router.get('/review/:id' , (req, res) =>  db.technical_reviews.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data) })   
 );
-router.get('/user/:id' , (req, res) =>  db.users.findOne({
-    where: {   id: req.params.id }}).then( data => { res.send(data)})   
-);
+
 router.get('/vehicle/:id' , (req, res) =>  db.vehicles.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data)})   
 );
 
-router.get('/user/:user_name/:password' , (req, res) =>  db.users.findOne({
-    where: {   user_name: req.params.user_name, password: req.params.password }}).then( data => { res.send(data)})
-);
-
 // ****************************************** POST:
 
-router.post('/user' , function(req, res)  {
-    if ( !req.body.user_name || !req.body.password )
-        res.json({ error: 'Bad Data' })
-    
-    db.users.create(req.body)
-    .then( data => { res.send(data) })
-    .catch( function (err) {
-        res.sendStatus(500)});
-});
 router.post('/review' , function(req, res)  {
     if ( !req.body.state )
         res.json({ error: 'Bad Data' })
@@ -130,7 +110,6 @@ router.put('/review/:id' , function(req, res)  {
     ).then( () => { res.json({ status : 'Updated!'}) });
 });
 
-
 // AUTHENTIFICATION ****************
 router.post('/register', (req, res) => {
     var userData = req.body;
@@ -201,5 +180,31 @@ db.users.findOne({
     res.send('error: ' + err)
     })
 });
+
+
+// OSJETLJIVI PODACI: 
+router.get('/user/:id' , (req, res) =>  db.users.findOne({
+    where: {   id: req.params.id } } , {
+        attributes: {
+            exclude: ['password']
+        }
+    }).then( data => { res.send(data)})   
+);
+
+router.post('/user' , function(req, res)  {
+    if ( !req.body.user_name || !req.body.password )
+        res.json({ error: 'Bad Data' })    
+    db.users.create(req.body)
+    .then( data => { res.send(data) })
+    .catch( function (err) {
+        res.sendStatus(500)});
+});
+
+router.get('/user', (req, res) => db.users.findAll({attributes: {exclude: ['password']}
+}).then(users => res.json(users)));
+
+router.get('/user/:user_name/:password' , (req, res) =>  db.users.findOne({
+    where: {   user_name: req.params.user_name, password: req.params.password }}).then( data => { res.send(data)})
+);
 
 module.exports = router;

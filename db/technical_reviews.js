@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
         state: {
             type: Sequelize.STRING,
             validate: {
-                isIn: [['NA PREGLEDU', 'ZAVRSEN','NA CEKANJU', 'U ARHIVI', 'ON_HOLD', 'IN_PROGRESS', 'DONE', 'IN_ARCHIVE']]
+                isIn: [['NA PREGLEDU', 'ZAVRSEN', 'U ARHIVI', 'IN_PROGRESS', 'DONE', 'IN_ARCHIVE']]
             }
         },
         kind: {
