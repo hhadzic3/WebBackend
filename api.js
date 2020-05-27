@@ -115,7 +115,7 @@ router.post('/register', (req, res) => {
     var userData = req.body;
 db.users.findOne({
     where: {
-    email: req.body.email
+        mail: req.body.mail
     }
 }).then(user => {
     if (!user) {
