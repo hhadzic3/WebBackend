@@ -22,6 +22,9 @@ router.get('/review/:id' , (req, res) =>  db.technical_reviews.findOne({
 router.get('/review/state/:state' , (req, res) =>  db.technical_reviews.findAll({
     where: {   state: req.params.state }}).then( data => { res.send(data) })   
 );
+router.get('/review/state/:state/user/:id' , (req, res) =>  db.technical_reviews.findAll({
+    where: {   state: req.params.state , responsible_person: req.params.id }}).then( data => { res.send(data) })   
+);
 
 router.get('/vehicle/:id' , (req, res) =>  db.vehicles.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data)})   
