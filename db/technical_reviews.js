@@ -22,7 +22,11 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         responsible_person: DataTypes.INTEGER,
-        vehicle: DataTypes.INTEGER
+        vehicle: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            unique: true
+          },
     }, {
         sequelize,
         tableName: 'technical_reviews',
