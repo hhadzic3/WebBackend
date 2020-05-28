@@ -195,6 +195,13 @@ router.get('/user/:id' , (req, res) =>  db.users.findOne({
         }
     }).then( data => { res.send(data)})   
 );
+router.get('/user/position/:job' , (req, res) =>  db.users.findAll({
+    where: {   position: req.params.job } } , {
+        attributes: {
+            exclude: ['password']
+        }
+    }).then( data => { res.send(data)})   
+);
 
 router.post('/user' , function(req, res)  {
     if ( !req.body.user_name || !req.body.password )
