@@ -31,7 +31,11 @@ function dataInit() {
         db.vehicles.create({id: 3,  owner_name: "Mirza",brand: "Golf 7",type: "TERETNO",
         serial_number: "44444",production_year: 2020,date_of_use: '2.2.2000',previous_inspection: '5.5.2019'}),
         db.vehicles.create({id: 4,  owner_name: "Harun",brand: "Tesla",type: "PRIKLJUCNO",
+        serial_number: "99999",production_year: 2010,date_of_use: '2.2.2011',previous_inspection: '5.5.2019'}),
+        db.vehicles.create({id: 5,  owner_name: "Faris",brand: "BMW X6",type: "PUTNICKO",
         serial_number: "55555",production_year: 2010,date_of_use: '2.2.2011',previous_inspection: '5.5.2019'}),
+        db.vehicles.create({id: 6,  owner_name: "Kenan",brand: "Nissan",type: "PUTNICKO",
+        serial_number: "6666",production_year: 2010,date_of_use: '2.2.2011',previous_inspection: '5.5.2019'}),
     ];
     const failuresPromiseList = [
         db.failures.create({id: 1, name: "motor", vehicle: 1 , accurrence_date: '2.2.2015',repair_date: null}),
@@ -40,7 +44,8 @@ function dataInit() {
     const technical_reviewsPromiseList = [
         db.technical_reviews.create( { id:1 , state:'NA PREGLEDU', kind: 'VANREDNI', responsible_person:1, vehicle:1 } ),
         db.technical_reviews.create( { id:2 , state:'ZAVRSEN', kind: 'REGULARNI', responsible_person:4, vehicle:2 } ),
-        db.technical_reviews.create( { id:3 , state:'U ARHIVI', kind: 'REGULARNI', responsible_person:4, vehicle:3 } )
+        db.technical_reviews.create( { id:3 , state:'U ARHIVI', kind: 'REGULARNI', responsible_person:4, vehicle:3 } ),
+        db.technical_reviews.create( { id:4 , state:'NA PREGLEDU', kind: 'PREVENTIVNI', responsible_person:1, vehicle:5 } )
     ];
 
     return new Promise((resolve, reject) => {
