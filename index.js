@@ -11,6 +11,6 @@ var cors = require('cors')
 app.use(cors()) 
 app.use('/api', api);
 
-module.exports = app.listen(8080, () => {
+module.exports = app.listen(process.env.PORT || 8080, () => {
     console.log('Server is working on http://localhost:8080/api');
 });
