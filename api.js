@@ -115,6 +115,19 @@ router.put('/review/:id' , function(req, res)  {
     ).then( () => { res.json({ status : 'Updated!'}) });
 });
 
+
+router.put('/part/:id' , function(req, res)  {
+    if ( !req.body.state )
+        res.json({ error: 'Bad Data' })
+    
+    var v = req.body;
+    db.parts.update({
+        name: v.name,
+        availability:v.availability
+    }, { where: { id: req.params.id } }
+    ).then( () => { res.json({ status : 'Updated!'}) });
+});
+
 // AUTHENTIFICATION ****************
 router.post('/register', (req, res) => {
     var userData = req.body;
