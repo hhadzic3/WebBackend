@@ -5,7 +5,6 @@
 
 ->  upisite npm install
 
-->  Pozovite init.js (ukoliko prvi put pokrecete app) kako bi se kreirali pocetni podaci i tabele (node init.js)
 
 ->  Modeli su definisani u datotekama: korisnici.js, kvarovi.js, vozila.js, tehnicki_pregledi.js, dijelovi.js
     Veze su definisane u datoteci: db.js

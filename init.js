@@ -1,11 +1,12 @@
 const db = require('./db/db');
 
-db.sequelize.sync({ force: true }).then(function () {
-    dataInit().then(() => {
-        console.log("Gotovo kreiranje tabela i ubacivanje pocetnih podataka!");
-        process.exit();
-    });
-});
+function initialize() {
+	db.sequelize.sync({ force: true }).then(function () {
+	    dataInit().then(() => {
+	        console.log("Gotovo kreiranje tabela i ubacivanje pocetnih podataka!");
+	    });
+	});
+}
 
 function dataInit() {
     const partsPromiseList = [
@@ -58,3 +59,4 @@ function dataInit() {
     });
 }
 
+exports.initialize = initialize;
