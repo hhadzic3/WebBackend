@@ -1,5 +1,11 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('DBINSPECTION', 'root', 'root', {host: '127.0.0.1', dialect: 'mysql', logging: false});
+const sequelize = new Sequelize( //'DBINSPECTION', 'root', 'root', 
+    'heroku_b38a2a2d3a463a5', 'b404a5123eb3a1', '43419ff8', { //host: '127.0.0.1',
+        host: 'eu-cdbr-west-03.cleardb.net',
+        dialect: 'mysql',
+        logging: false
+    }
+);
 const db = {};
 
 db.Sequelize = Sequelize;
@@ -16,13 +22,40 @@ db.vehicles = sequelize.import(__dirname + '/vehicles.js');
 // Definisanje relacija
 
 // Korisnik <--> Pregled
-db.users.hasOne(db.technical_reviews, {foreignKey: {name: 'responsible_person'}});
-db.technical_reviews.belongsTo(db.users, {as: 'responsiblePerson', foreignKey: {name: 'responsible_person'}});
+db.users.hasOne(db.technical_reviews, {
+    foreignKey: {
+        name: 'responsible_person'
+    }
+});
+db.technical_reviews.belongsTo(db.users, {
+    as: 'responsiblePerson',
+    foreignKey: {
+        name: 'responsible_person'
+    }
+});
 // Vozilo <--> Pregledi
-db.vehicles.hasMany(db.technical_reviews, {foreignKey: {name: 'vehicle'}});
-db.technical_reviews.belongsTo(db.vehicles, {as: 'vehicleInUse', foreignKey: {name: 'vehicle'}});
+db.vehicles.hasMany(db.technical_reviews, {
+    foreignKey: {
+        name: 'vehicle'
+    }
+});
+db.technical_reviews.belongsTo(db.vehicles, {
+    as: 'vehicleInUse',
+    foreignKey: {
+        name: 'vehicle'
+    }
+});
 // Vozilo <--> Kvarovi
-db.vehicles.hasMany(db.failures, {foreignKey: {name: 'vehicle'}});
-db.failures.belongsTo(db.vehicles, {as: 'vehicleFailures', foreignKey: {name: 'vehicle'}});
+db.vehicles.hasMany(db.failures, {
+    foreignKey: {
+        name: 'vehicle'
+    }
+});
+db.failures.belongsTo(db.vehicles, {
+    as: 'vehicleFailures',
+    foreignKey: {
+        name: 'vehicle'
+    }
+});
 
 module.exports = db;
